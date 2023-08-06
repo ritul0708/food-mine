@@ -1,0 +1,31 @@
+version: '3.7'
+services:
+  frontend:
+    image: frontend-production:${ENV}
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - mern-stack-net
+    volumes:
+      - caddy-data:/data
+      - caddy-config:/config
+  backend:
+    image: backend
+    restart: unless-stopped
+    env_file: ./backend/config/${ENV}.env
+    ports:
+      - "5000:5000"
+    networks:
+      - mern-stack-net
+  networks:
+    mern-stack-net:
+      driver: bridge
+  volumes:
+    mongo-data:
+      driver: local
+    caddy-data:
+      driver: local
+    caddy-config:
+      driver: local

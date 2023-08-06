@@ -1,11 +1,8 @@
 FROM node:18-alpine
 
-# We use nodemon to restart the server every time there's a change
-RUN npm install -g nodemon
+WORKDIR /usr/src/app
 
-WORKDIR /app
-
-COPY package.json .
+COPY package*.json .
 
 RUN npm install
 
@@ -14,4 +11,4 @@ COPY . .
 EXPOSE 5000
 
 # Use script specified in package,json
-CMD ["npm", "run", "dev"]
+CMD ["npm", "start"]

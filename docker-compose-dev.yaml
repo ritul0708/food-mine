@@ -1,0 +1,38 @@
+version: '3.7'
+services:
+  frontend:
+    image: frontend-dev
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    networks:
+      - mern-stack-net
+    volumes:
+      - ./frontend/:/usr/src/app
+      - /usr/src/app/node_modules
+  backend:
+    image: backend
+    env_file: ./backend/config/dev.env
+    ports:
+      - "5000:5000"
+    networks:
+      - mern-stack-net
+    volumes:
+      - ./backend/:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:4.4-bionic
+    ports:
+      - "27027:27027"
+    networks:
+      - mern-stack-net
+    volumes:
+      - mongo-data:/data/db
+  networks:
+    mern-stack-net:
+      driver: bridge
+  volumes:
+    mongo-data:
+      driver: local
