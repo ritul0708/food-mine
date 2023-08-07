@@ -1,5 +1,5 @@
 build-dev:
-	docker build -t front-dev -f Dockerfile.dev .
+	docker build -t frontend-dev -f Dockerfile.dev .
 
 ###################
 

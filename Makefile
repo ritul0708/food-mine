@@ -5,7 +5,7 @@ build-dev:
 	cd backend && $(MAKE) build
 
 run-dev:
-	docker-compose -f docker-compose-dev.yml up
+	docker-compose -f docker-compose-dev.yaml up
 
 ### LOCAL (prod config)
 
@@ -14,7 +14,7 @@ build-local:
 	cd backend && $(MAKE) build
 
 run-local:
-	ENV=local docker-compose -f docker-compose-production.yml up
+	ENV=local docker-compose -f docker-compose-production.yaml up
 		
 
 ### PROD
@@ -24,7 +24,7 @@ build-production:
 	cd backend && $(MAKE) build	
 
 run-production:
-	ENV=production docker-compose -f docker-compose-production.yml up
+	ENV=production docker-compose -f docker-compose-production.yaml up
 	
 stop:
 	docker-compose down
